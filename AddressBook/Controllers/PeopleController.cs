@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,8 @@ namespace AddressBook.Controllers
         // GET: People
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Person.ToListAsync());
+            // sorted by last name
+          return View(await _context.Person.OrderByDescending(p => p.LastName).ToListAsync());
         }
 
         // GET: People/Details/5
