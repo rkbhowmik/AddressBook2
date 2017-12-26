@@ -25,6 +25,12 @@ namespace AddressBook.Controllers
             return View(await addressBookContext.ToListAsync());
         }
 
+        public async Task<IActionResult> PersonBy(int id)
+        {
+            var applicationDbContext = _context.Address.Where(address => address.PersonID == id);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         // GET: Addresses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -155,5 +161,7 @@ namespace AddressBook.Controllers
         {
             return _context.Address.Any(e => e.AddressID == id);
         }
+
+        
     }
 }
