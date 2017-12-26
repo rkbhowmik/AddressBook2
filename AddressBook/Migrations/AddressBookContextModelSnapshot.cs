@@ -25,19 +25,24 @@ namespace AddressBook.Migrations
                     b.Property<int>("AddressID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired();
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("HomeNumber");
+                    b.Property<string>("HomeNumber")
+                        .IsRequired();
 
                     b.Property<int>("PersonID");
 
-                    b.Property<string>("PhoneNumber");
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired();
 
-                    b.Property<int>("PostalCode");
+                    b.Property<string>("PostalCode")
+                        .IsRequired();
 
-                    b.Property<string>("StreetName");
+                    b.Property<string>("StreetName")
+                        .IsRequired();
 
                     b.HasKey("AddressID");
 
@@ -51,9 +56,11 @@ namespace AddressBook.Migrations
                     b.Property<int>("PersonID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FirstName")
+                        .IsRequired();
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
                     b.HasKey("PersonID");
 

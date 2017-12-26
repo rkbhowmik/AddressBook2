@@ -1,0 +1,95 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AddressBook.Models;
+
+namespace AddressBook.Data
+{
+    public static class DbSeeder
+    {
+        public static void Initialize(AddressBookContext context)
+        {
+            context.Database.EnsureCreated();
+
+            // Look for any person
+            if (context.Person.Any())
+            {
+                return;
+            }
+
+            var person = new Person[]
+            {
+                new Person {PersonID = 1, FirstName = "Michael", LastName = "Jackson"},
+                new Person {PersonID = 2, FirstName = "Steve", LastName = "Jobs"},
+                new Person {PersonID = 3, FirstName = "Bill", LastName = "Gates"},
+                new Person {PersonID = 4, FirstName = "Rajib Kumar", LastName = "Bhowmik"},
+                new Person {PersonID = 5, FirstName = "Steve", LastName = "Ozniyak"},
+            };
+
+            foreach (Person p in person)
+            {
+                context.Person.Add(p);
+            }
+            context.SaveChanges();
+
+            var address = new Address[]
+            {
+                new Address
+                {
+                    StreetName = "Kungsgatan",
+                    HomeNumber = "1A",
+                    PostalCode = "12345",
+                    City = "Stockolm",
+                    PhoneNumber = "0712345678",
+                    Email = "micjack@yahoo.com",
+                   
+                },
+                new Address
+                {
+                    StreetName = "Häggviksdalen",
+                    HomeNumber = "12",
+                    PostalCode = "14589",
+                    City = "Stockolm",
+                    PhoneNumber = "0712545678",
+                    Email = "stevejobs@apple.com",
+                 
+                },
+                new Address
+                {
+                    StreetName = "Visättravägen",
+                    HomeNumber = "32",
+                    PostalCode = "14859",
+                    City = "Flemingsberg",
+                    PhoneNumber = "0712007678",
+                    Email = "billgates@outlook.com",
+              
+                },
+                new Address
+                {
+                    StreetName = "Bandstolsvägen",
+                    HomeNumber = "49",
+                    PostalCode = "75648",
+                    City = "Uppsala",
+                    PhoneNumber = "0712995678",
+                    Email = "rajll828@yahoo.com",
+                 
+                },
+                new Address
+                {
+                    StreetName = "Kistadalen",
+                    HomeNumber = "12B",
+                    PostalCode = "19765",
+                    City = "Stockolm",
+                    PhoneNumber = "0713987600",
+                    Email = "ozniyak@gmail.com"
+                }
+            };
+            foreach (Address a in address)
+            {
+                context.Address.Add(a);
+            }
+            context.SaveChanges();
+        }
+    }
+}

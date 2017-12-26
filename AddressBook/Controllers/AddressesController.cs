@@ -47,7 +47,7 @@ namespace AddressBook.Controllers
         // GET: Addresses/Create
         public IActionResult Create()
         {
-            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "PersonID");
+            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "FirstName");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace AddressBook.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "PersonID", address.PersonID);
+            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "FirstName", address.PersonID);
             return View(address);
         }
 
@@ -81,7 +81,7 @@ namespace AddressBook.Controllers
             {
                 return NotFound();
             }
-            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "PersonID", address.PersonID);
+            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "FirstName", address.PersonID);
             return View(address);
         }
 
@@ -117,7 +117,7 @@ namespace AddressBook.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "PersonID", address.PersonID);
+            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "FirstName", address.PersonID);
             return View(address);
         }
 
