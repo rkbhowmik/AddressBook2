@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Address-Details</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -12,27 +12,37 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.PhoneNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StreetName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HomeNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PostalCode)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.City)
-                </th>
             <th>
                 @Html.DisplayNameFor(model => model.Person)
             </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.StreetName)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.HomeNumber)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.PostalCode)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
+           
+           
+
             <th></th>
         </tr>
     </thead>
@@ -40,11 +50,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                @Html.DisplayFor(modelItem => item.Person.FirstName)
+                @Html.DisplayFor(modelItem => item.Person.LastName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.StreetName)
             </td>
@@ -58,7 +67,10 @@
                 @Html.DisplayFor(modelItem => item.City)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Person.FirstName)
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.AddressID">Edit</a> |
