@@ -14,7 +14,10 @@ namespace AddressBook.Models
         public string StreetName { get; set; }
         public string HomeNumber { get; set; }
 
-        public int PostelCode { get; set; }
+        public int PostalCode { get; set; }
         public string City { get; set; }
+
+        public int PersonID { get; set; }
+        public Person Person { get; set; }
     }
 }

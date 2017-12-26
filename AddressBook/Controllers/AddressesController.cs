@@ -9,22 +9,23 @@ using AddressBook.Models;
 
 namespace AddressBook.Controllers
 {
-    public class PeopleController : Controller
+    public class AddressesController : Controller
     {
         private readonly AddressBookContext _context;
 
-        public PeopleController(AddressBookContext context)
+        public AddressesController(AddressBookContext context)
         {
             _context = context;
         }
 
-        // GET: People
+        // GET: Addresses
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Person.ToListAsync());
+            var addressBookContext = _context.Address.Include(a => a.Person);
+            return View(await addressBookContext.ToListAsync());
         }
 
-        // GET: People/Details/5
+        // GET: Addresses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +33,42 @@ namespace AddressBook.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person
-                .SingleOrDefaultAsync(m => m.PersonID == id);
-            if (person == null)
+            var address = await _context.Address
+                .Include(a => a.Person)
+                .SingleOrDefaultAsync(m => m.AddressID == id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            return View(person);
+            return View(address);
         }
 
-        // GET: People/Create
+        // GET: Addresses/Create
         public IActionResult Create()
         {
+            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "PersonID");
             return View();
         }
 
-        // POST: People/Create
+        // POST: Addresses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName")] Person person)
+        public async Task<IActionResult> Create([Bind("AddressID,PhoneNumber,Email,StreetName,HomeNumber,PostalCode,City,PersonID")] Address address)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(person);
+                _context.Add(address);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(person);
+            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "PersonID", address.PersonID);
+            return View(address);
         }
 
-        // GET: People/Edit/5
+        // GET: Addresses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +76,23 @@ namespace AddressBook.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person.SingleOrDefaultAsync(m => m.PersonID == id);
-            if (person == null)
+            var address = await _context.Address.SingleOrDefaultAsync(m => m.AddressID == id);
+            if (address == null)
             {
                 return NotFound();
             }
-            return View(person);
+            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "PersonID", address.PersonID);
+            return View(address);
         }
 
-        // POST: People/Edit/5
+        // POST: Addresses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName")] Person person)
+        public async Task<IActionResult> Edit(int id, [Bind("AddressID,PhoneNumber,Email,StreetName,HomeNumber,PostalCode,City,PersonID")] Address address)
         {
-            if (id != person.PersonID)
+            if (id != address.AddressID)
             {
                 return NotFound();
             }
@@ -96,12 +101,12 @@ namespace AddressBook.Controllers
             {
                 try
                 {
-                    _context.Update(person);
+                    _context.Update(address);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonExists(person.PersonID))
+                    if (!AddressExists(address.AddressID))
                     {
                         return NotFound();
                     }
@@ -112,10 +117,11 @@ namespace AddressBook.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(person);
+            ViewData["PersonID"] = new SelectList(_context.Person, "PersonID", "PersonID", address.PersonID);
+            return View(address);
         }
 
-        // GET: People/Delete/5
+        // GET: Addresses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +129,31 @@ namespace AddressBook.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person
-                .SingleOrDefaultAsync(m => m.PersonID == id);
-            if (person == null)
+            var address = await _context.Address
+                .Include(a => a.Person)
+                .SingleOrDefaultAsync(m => m.AddressID == id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            return View(person);
+            return View(address);
         }
 
-        // POST: People/Delete/5
+        // POST: Addresses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var person = await _context.Person.SingleOrDefaultAsync(m => m.PersonID == id);
-            _context.Person.Remove(person);
+            var address = await _context.Address.SingleOrDefaultAsync(m => m.AddressID == id);
+            _context.Address.Remove(address);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonExists(int id)
+        private bool AddressExists(int id)
         {
-            return _context.Person.Any(e => e.PersonID == id);
+            return _context.Address.Any(e => e.AddressID == id);
         }
     }
 }
