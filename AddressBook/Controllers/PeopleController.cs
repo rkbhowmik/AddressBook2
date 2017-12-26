@@ -35,6 +35,8 @@ namespace AddressBook.Controllers
             }
 
             var person = await _context.Person
+                .Include(a=>a.Addresses)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.PersonID == id);
             if (person == null)
             {

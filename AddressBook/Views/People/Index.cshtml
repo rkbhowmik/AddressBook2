@@ -6,39 +6,50 @@
 
 <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
+<div class="alert alert-success" role="alert">
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+</div>
 
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Person Details</div>
 
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.PersonID">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.PersonID">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.PersonID">Delete</a> |
-            <a asp-controller="Addresses" asp-action="PersonBy" asp-route-id="@item.PersonID">Addresses</a> 
-        </td>
-    </tr>
-}
-    </tbody>
-</table>
+    <!-- Table -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+       
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PersonID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PersonID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PersonID">Delete</a> |
+                    <a asp-controller="Addresses" asp-action="PersonBy" asp-route-id="@item.PersonID">Addresses</a> 
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+</div>
+

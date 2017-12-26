@@ -42,6 +42,7 @@ namespace AddressBook.Controllers
             var address = await _context.Address
                 .Include(a => a.Person)
                 .SingleOrDefaultAsync(m => m.AddressID == id);
+
             if (address == null)
             {
                 return NotFound();

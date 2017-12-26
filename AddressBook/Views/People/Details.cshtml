@@ -22,10 +22,50 @@
         <dd>
             @Html.DisplayFor(model => model.LastName)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Addresses)
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Street</th>
+                    <th>House No.</th>
+                    <th>Post Code</th>
+                    <th>City</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                </tr>
+                @foreach (var item in Model.Addresses)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StreetName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HomeNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PostalCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.PersonID">Edit</a> |
-    <a asp-controller="Addresses" asp-action="PersonBy" asp-route-id="@Model.PersonID">Addresses</a> |
+    @*<a asp-controller="Addresses" asp-action="PersonBy" asp-route-id="@Model.PersonID">Addresses</a> |*@
     <a asp-action="Index">Back to List</a>
 </div>

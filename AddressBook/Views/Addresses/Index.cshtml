@@ -6,78 +6,88 @@
 
 <h2>Address-Details</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Person)
-            </th>
+<div class="alert alert-success" role="alert">
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+</div>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Details List of Addresses</div>
 
-            <th>
-                @Html.DisplayNameFor(model => model.StreetName)
-            </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.HomeNumber)
-            </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.PostalCode)
-            </th>
+    <!-- Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Person)
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StreetName)
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HomeNumber)
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostalCode)
+                </th>
 
-           
-           
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Person.FirstName)
-                @Html.DisplayFor(modelItem => item.Person.LastName)
-            </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.StreetName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HomeNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostalCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AddressID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AddressID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AddressID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+
+
+
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Person.FirstName)
+                        @Html.DisplayFor(modelItem => item.Person.LastName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StreetName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HomeNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostalCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.AddressID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.AddressID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.AddressID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
