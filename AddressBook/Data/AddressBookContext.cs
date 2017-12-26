@@ -17,6 +17,12 @@ namespace AddressBook.Models
         public DbSet<Person> Person { get; set; }
 
         public DbSet<Address> Address { get; set; }
-       
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Person>().ToTable("Person");
+            modelBuilder.Entity<Address>().ToTable("Address");
+          
+        }
     }
 }
