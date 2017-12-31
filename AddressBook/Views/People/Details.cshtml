@@ -9,8 +9,51 @@
 <div>
     <h4>Person</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
+    
+    <div class="container">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">@Html.DisplayFor(model => model.FirstName)  @Html.DisplayFor(model => model.LastName)</div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.FirstName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.LastName)
+                        </dd>
+                        <br />
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Addresses)
+                        </dt>
+
+                        <dd>
+                        
+                            @foreach (var item in Model.Addresses)
+                            {
+                                <p>Street: @Html.DisplayFor(modelItem => item.StreetName) </p>
+                                <p>House: @Html.DisplayFor(modelItem => item.HomeNumber) </p>
+                                <p>Post: @Html.DisplayFor(modelItem => item.PostalCode)</p>
+                                <p>City:   @Html.DisplayFor(modelItem => item.City) </p>
+                                <p>Phone: @Html.DisplayFor(modelItem => item.PhoneNumber)</p>
+                                <p>Email:  @Html.DisplayFor(modelItem => item.Email)</p> 
+
+                            }
+                      
+                            </dd>
+                    </dl>
+                </div> 
+            </div>
+        </div>
+ </div>
+    @*<dl class="dl-horizontal">
+     <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
         <dd>
@@ -62,7 +105,7 @@
                 }
             </table>
         </dd>
-    </dl>
+    </dl>*@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.PersonID">Edit</a> |
