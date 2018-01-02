@@ -1,17 +1,38 @@
-﻿
+﻿html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
+    /* Margin bottom by footer height */
+    margin: 0px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    border-top: 5px solid rgba(2,138,197,0.7);
+   
+    padding: 20px;
+}
+
+
+/*body {
     padding: 0;
     margin: 0;
    
     font-family: 'Cinzel Decorative', cursive;
-}
+}*/
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
-/*.body-content {
+.body-content {
     padding-left: 15px;
     padding-right: 15px;
-}*/
+}
 
 /* Carousel */
 .carousel-caption p {
@@ -29,15 +50,7 @@ body {
     margin: 15px;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 60px;
-    background-color: #f5f5f5;
-    border-top: 2px solid green;
-}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
@@ -53,6 +66,8 @@ body {
     grid-gap: 1em;
     align-items: stretch;
     font-family: 'Merriweather', serif;
+    margin: 10px 10px;
+  
 }
 
 .wrapper > div{
