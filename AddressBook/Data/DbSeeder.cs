@@ -10,6 +10,7 @@ namespace AddressBook.Data
     {
         public static void Initialize(AddressBookContext context)
         {
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             // Look for any person
@@ -18,13 +19,15 @@ namespace AddressBook.Data
                 return;
             }
 
+            var michaelJackson = new Person { FirstName = "Michael", LastName = "Jackson" };
+
             var person = new Person[]
             {
-                new Person {PersonID = 1, FirstName = "Michael", LastName = "Jackson"},
-                new Person {PersonID = 2, FirstName = "Steve", LastName = "Jobs"},
-                new Person {PersonID = 3, FirstName = "Bill", LastName = "Gates"},
-                new Person {PersonID = 4, FirstName = "Rajib Kumar", LastName = "Bhowmik"},
-                new Person {PersonID = 5, FirstName = "Steve", LastName = "Ozniyak"},
+                michaelJackson,
+                new Person {FirstName = "Steve", LastName = "Jobs"},
+                new Person {FirstName = "Bill", LastName = "Gates"},
+                new Person {FirstName = "Rajib Kumar", LastName = "Bhowmik"},
+                new Person {FirstName = "Steve", LastName = "Ozniyak"},
             };
 
             foreach (Person p in person)
@@ -37,6 +40,7 @@ namespace AddressBook.Data
             {
                 new Address
                 {
+                    Person = michaelJackson,
                     StreetName = "Kungsgatan",
                     HomeNumber = "1A",
                     PostalCode = "12345",
@@ -47,6 +51,7 @@ namespace AddressBook.Data
                 },
                 new Address
                 {
+                    Person = michaelJackson,
                     StreetName = "Häggviksdalen",
                     HomeNumber = "12",
                     PostalCode = "14589",
@@ -57,6 +62,7 @@ namespace AddressBook.Data
                 },
                 new Address
                 {
+                    Person = michaelJackson,
                     StreetName = "Visättravägen",
                     HomeNumber = "32",
                     PostalCode = "14859",
@@ -67,6 +73,7 @@ namespace AddressBook.Data
                 },
                 new Address
                 {
+                    Person = michaelJackson,
                     StreetName = "Bandstolsvägen",
                     HomeNumber = "49",
                     PostalCode = "75648",
@@ -77,6 +84,7 @@ namespace AddressBook.Data
                 },
                 new Address
                 {
+                    Person = michaelJackson,
                     StreetName = "Kistadalen",
                     HomeNumber = "12B",
                     PostalCode = "19765",
