@@ -46,7 +46,7 @@ namespace AddressBook
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
+                    routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}/{slug?}");
             });

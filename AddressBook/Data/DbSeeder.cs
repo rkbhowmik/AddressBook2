@@ -10,7 +10,7 @@ namespace AddressBook.Data
     {
         public static void Initialize(AddressBookContext context)
         {
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             // Look for any person
