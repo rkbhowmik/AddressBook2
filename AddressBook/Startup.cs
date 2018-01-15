@@ -38,8 +38,20 @@ namespace AddressBook
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
+
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //app.Use((ctx, next) =>
+            //{
+            //    var sv = new CultureInfo("sv-SE");
+            //    System.Threading.Thread.CurrentThread.CurrentCulture = sv;
+            //    System.Threading.Thread.CurrentThread.CurrentUICulture = sv;
+
+            //    return next();
+            //});
+
             List<CultureInfo> supportedCultures = new List<CultureInfo>
             {
                 new CultureInfo("sv-SE"),

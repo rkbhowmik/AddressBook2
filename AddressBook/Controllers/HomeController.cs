@@ -14,6 +14,7 @@ namespace AddressBook.Controllers
     {
         public IActionResult Index()
         {
+            //ViewData["Message"] = _Localizer["Welcome"];
             return View();
         }
 
@@ -31,6 +32,7 @@ namespace AddressBook.Controllers
 
         public IActionResult Contact()
         {
+
             ViewData["Message"] = "Your contact page.";
 
             return View();
