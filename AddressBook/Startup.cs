@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -21,9 +22,15 @@ namespace AddressBook
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+
+       
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddLocalization(options => options.ResourcesPath = "Resources");  // Globalization and Localization process
+
+            services.AddMvc()
+                .AddViewLocalization()              //This line is also included in Globalization and Localization process
+                .AddDataAnnotationsLocalization();  // This line as well 
 
             services.AddDbContext<AddressBookContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AddressBookContext")));
@@ -32,6 +39,13 @@ namespace AddressBook
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            List<CultureInfo> supportedCultures = new List<CultureInfo>
+            {
+                new CultureInfo("sv"),
+                new CultureInfo("en")
+            };
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
