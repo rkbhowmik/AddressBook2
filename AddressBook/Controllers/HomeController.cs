@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AddressBook.Models;
+using AddressBook.Resources;
+using Microsoft.Extensions.Localization;
 
 namespace AddressBook.Controllers
 {
@@ -15,6 +17,11 @@ namespace AddressBook.Controllers
             return View();
         }
 
+        private readonly IStringLocalizer _Localizer;
+        public HomeController(IStringLocalizerFactory factory)
+        {
+             _Localizer = factory.Create(typeof(SharedResources));
+        }
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

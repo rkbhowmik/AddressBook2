@@ -27,7 +27,7 @@ namespace AddressBook
        
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLocalization(options => options.ResourcesPath = "Resources");  // Globalization and Localization process
+            services.AddLocalization(options => options.ResourcesPath = "");  // Globalization and Localization process
 
             services.AddMvc()
                 .AddViewLocalization()              //This line is also included in Globalization and Localization process
@@ -42,13 +42,14 @@ namespace AddressBook
         {
             List<CultureInfo> supportedCultures = new List<CultureInfo>
             {
-                new CultureInfo("sv"),
-                new CultureInfo("en")
+                new CultureInfo("sv-SE"),
+                new CultureInfo("en-US"),
+                new CultureInfo("bn-BD")
             };
 
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new RequestCulture("sv"),
+                DefaultRequestCulture = new RequestCulture("sv-SE"),
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures
             });
