@@ -30,6 +30,7 @@ namespace AddressBook
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddLocalization(options => options.ResourcesPath = "");
+
             services.Configure<RequestLocalizationOptions>(
                 opts =>
                 {
@@ -49,6 +50,7 @@ namespace AddressBook
                     };
                 }
             );
+
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix); 
                
@@ -57,9 +59,7 @@ namespace AddressBook
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-
-
-
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             

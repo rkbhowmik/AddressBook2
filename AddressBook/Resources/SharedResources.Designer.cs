@@ -61,6 +61,15 @@ namespace AddressBook.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose Language.
+        /// </summary>
+        public static string Choose_Language {
+            get {
+                return ResourceManager.GetString("Choose Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome here!.
         /// </summary>
         public static string Welcome {
