@@ -9,7 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using AddressBook.Models;
+using AddressBook.Resources;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace AddressBook
 {
@@ -27,12 +29,29 @@ namespace AddressBook
        
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLocalization(options => options.ResourcesPath = "");  // Globalization and Localization process
-
+            services.AddLocalization(options => options.ResourcesPath = "");
+            services.Configure<RequestLocalizationOptions>(
+                opts =>
+                {
+                    var supportedCultures = new[]
+                    {
+                        new CultureInfo("sv-SE"),
+                        new CultureInfo("en-US"),
+                        new CultureInfo("bn-BD")
+                    };
+                    opts.DefaultRequestCulture = new RequestCulture("sv-SE");
+                    opts.SupportedCultures = supportedCultures;
+                    opts.SupportedUICultures = supportedCultures;
+                    opts.RequestCultureProviders = new List<IRequestCultureProvider>
+                    {
+                        new QueryStringRequestCultureProvider(),
+                        new CookieRequestCultureProvider()
+                    };
+                }
+            );
             services.AddMvc()
-                .AddViewLocalization()              //This line is also included in Globalization and Localization process
-                .AddDataAnnotationsLocalization();  // This line as well 
-
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix); 
+               
             services.AddDbContext<AddressBookContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AddressBookContext")));
         }
@@ -43,29 +62,7 @@ namespace AddressBook
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //app.Use((ctx, next) =>
-            //{
-            //    var sv = new CultureInfo("sv-SE");
-            //    System.Threading.Thread.CurrentThread.CurrentCulture = sv;
-            //    System.Threading.Thread.CurrentThread.CurrentUICulture = sv;
-
-            //    return next();
-            //});
-
-            List<CultureInfo> supportedCultures = new List<CultureInfo>
-            {
-                new CultureInfo("sv-SE"),
-                new CultureInfo("en-US"),
-                new CultureInfo("bn-BD")
-            };
-
-            app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("sv-SE"),
-                SupportedCultures = supportedCultures,
-                SupportedUICultures = supportedCultures
-            });
-
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -77,6 +74,8 @@ namespace AddressBook
             }
 
             app.UseStaticFiles();
+
+            app.UseRequestLocalization();
 
             app.UseMvc(routes =>
             {
